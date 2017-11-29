@@ -109,7 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Delete a task
             buttonDel.addEventListener('click', function () {
                 li.parentElement.removeChild(li);
-                counter--;
+                if (li.dataset.done === 'no') {
+                  counter--;
+                }
                 toDo.innerText = "Tasks to do: " + counter;
             });
 
