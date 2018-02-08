@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add a task
     addBtn.addEventListener('click', function() {
         if (validate()) {
-            text = input.value + ', priority: ' + priority.value;
+            text = input.value + '\n priority: ' + priority.value;
             var li = document.createElement('li');
             var pTask = document.createElement('p');
             var buttonCom = document.createElement('button');
