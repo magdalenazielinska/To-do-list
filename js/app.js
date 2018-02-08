@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     errors.style.color = 'red';
 
     // Tasks-to-do counter
-    var toDo = document.createElement('p');
+    var toDo = document.createElement('span');
     var counter = 0;
     toDo.innerText = "Tasks to do: " + counter;
     body.insertBefore(toDo, taskList);
@@ -41,13 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (validate()) {
             text = input.value + ', priority: ' + priority.value;
             var li = document.createElement('li');
-            var h1 = document.createElement('h1');
+            var pTask = document.createElement('p');
             var buttonCom = document.createElement('button');
             var buttonDel = document.createElement('button');
+            buttonCom.classList.add('taskbutton');
+            buttonDel.classList.add('taskbutton');
 
             li.dataset.priority = priority.value;
             li.dataset.done = 'no';
-            h1.innerText = text;
+            pTask.innerText = text;
             buttonDel.innerText = 'Delete';
             buttonCom.innerText = 'Complete';
 
@@ -62,45 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             taskList.insertBefore(li, allLi[sortNum]);
-            li.appendChild(h1);
+            li.appendChild(pTask);
             li.appendChild(buttonDel);
             li.appendChild(buttonCom);
-
-            //Colours of tasks depending on priority
-            switch(li.dataset.priority) {
-              case '10':
-                  li.style.backgroundColor = '#dd0000';
-                  break;
-              case '9':
-                  li.style.backgroundColor = '#e2400';
-                  break;
-              case '8':
-                  li.style.backgroundColor = '#e55202';
-                  break;
-              case '7':
-                  li.style.backgroundColor = '#e57519';
-                  break;
-              case '6':
-                  li.style.backgroundColor = '#ec8300';
-                  break;
-              case '5':
-                  li.style.backgroundColor = '#ec9b00';
-                  break;
-              case '4':
-                  li.style.backgroundColor = '#ecb200';
-                  break;
-              case '3':
-                  li.style.backgroundColor = '#ecbe00';
-                  break;
-              case '2':
-                  li.style.backgroundColor = '#ecd600';
-                  break;
-              case '1':
-                  li.style.backgroundColor = '#eaec00';
-                  break;
-              default:
-                  li.style.backgroundColor = '#eaec00';
-            }
 
             // Increase the number of tasks to do
             counter++;
@@ -119,48 +85,14 @@ document.addEventListener('DOMContentLoaded', function() {
             buttonCom.addEventListener('click', function () {
                 if (li.dataset.done === 'no') {
                     li.dataset.done = 'yes';
-                    li.style.backgroundColor = '#7d9f35';
+                    pTask.style.textDecoration = "line-through";
                     counter--;
                     toDo.innerText = "Tasks to do: " + counter;
                 } else {
                     li.dataset.done = 'no';
+                    pTask.style.textDecoration = null;
                     counter++;
                     toDo.innerText = "Tasks to do: " + counter;
-
-                    switch(li.dataset.priority) {
-                      case '10':
-                          li.style.backgroundColor = '#dd0000';
-                          break;
-                      case '9':
-                          li.style.backgroundColor = '#e2400';
-                          break;
-                      case '8':
-                          li.style.backgroundColor = '#e55202';
-                          break;
-                      case '7':
-                          li.style.backgroundColor = '#e57519';
-                          break;
-                      case '6':
-                          li.style.backgroundColor = '#ec8300';
-                          break;
-                      case '5':
-                          li.style.backgroundColor = '#ec9b00';
-                          break;
-                      case '4':
-                          li.style.backgroundColor = '#ecb200';
-                          break;
-                      case '3':
-                          li.style.backgroundColor = '#ecbe00';
-                          break;
-                      case '2':
-                          li.style.backgroundColor = '#ecd600';
-                          break;
-                      case '1':
-                          li.style.backgroundColor = '#eaec00';
-                          break;
-                      default:
-                          li.style.backgroundColor = '#eaec00';
-                    }
                 }
             });
 
